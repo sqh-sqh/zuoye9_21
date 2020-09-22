@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.my.dao.PeopleMapper">
+
+<!--    注册-->
+    <insert id="add">
+        INSERT INTO people (posi, name ,user ,passwd,status) VALUES (#{pp.posi}, #{pp.name}, #{pp.user}, #{pp.passwd}, #{pp.status})
+    </insert>
+<!--    查询-->
+    <select id="list" resultType="org.my.model.People">
+        SELECT * FROM people t1 <include refid="utilSql"></include>
+    </select>
+<!--    计数-->
+    <select id="listCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM people t1 <include refid="utilSql"></include>
+    </select>
+<!--    修改-->
+    <update id="save">
+        UPDATE people SET posi=#{people.posi}, name=#{people.name}, user=#{people.user}, passwd=#{people.passwd}, status=#{people.status} WHERE id = #{people.id}
+    </update>
+<!--    登录-->
+    <select id="login" resultType="org.my.model.People">
+        SELECT * FROM people WHERE user = #{user} AND passwd = #{passwd}
+    </select>
+
+
+<!--    动态SQL（查询）-->
+    <sql id="utilSql">
+        <where>
+            <if test="posi != null and posi != ''">
+                AND t1.posi LIKE CONCAT('%', #{posi}, '%')
+            </if>
+            <if test="user != null and user != ''">
+                AND t1.user LIKE CONCAT('%', #{user}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>

@@ -1,0 +1,20 @@
+.my-body {
+    padding: 5px;
+}
+
+.my-body .panel {
+    margin-bottom: 5px;
+}
+
+.my-body .table {
+    margin-bottom: 5px;
+}
+
+.my-nav {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.my-nav .pagination {
+    margin: 0;
+}

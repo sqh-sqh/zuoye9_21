@@ -1,0 +1,12 @@
+.in-assets {
+    width: 320px;
+    margin: 100px auto 0 auto;
+}
+
+.in-assets .panel-heading {
+    text-align: center;
+}
+
+.in-assets label {
+    color: #000000;
+}

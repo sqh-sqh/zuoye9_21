@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.my.dao.GoodsMapper">
+
+<!--    新增-->
+    <insert id="add">
+        INSERT INTO goods (code ,format ,measure,quantity,price,putTime) VALUES (#{gs.code}, #{gs.format}, #{gs.measure}, #{gs.quantity}, #{gs.price}, #{gs.putTime})
+    </insert>
+<!--    查询-->
+    <select id="list" resultType="org.my.model.Goods">
+        SELECT * FROM goods t1 <include refid="utilSql"></include>
+    </select>
+<!--    计数-->
+    <select id="listCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM goods t1 <include refid="utilSql"></include>
+    </select>
+<!--    修改-->
+    <update id="save">
+        UPDATE goods SET code=#{goods.code}, format=#{goods.format}, measure=#{goods.measure}, quantity=#{goods.quantity}, price=#{goods.price},putTime=#{goods.putTime} WHERE goodId = #{goods.goodId}
+    </update>
+<!--    删除-->
+    <delete id="del">
+        DELETE FROM goods WHERE goodId IN (
+        <foreach collection="ids" item="goodId" separator=",">
+            #{goodId}
+        </foreach>
+        )
+    </delete>
+
+<!--    动态SQL（查询）-->
+    <sql id="utilSql">
+        <where>
+            <if test="code != null and code != ''">
+                AND t1.code LIKE CONCAT('%', #{code}, '%')
+            </if>
+            <if test="format != null and format != ''">
+                AND t1.format LIKE CONCAT('%', #{format}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>

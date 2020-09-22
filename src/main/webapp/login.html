@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="panel panel-info login">
+    <div class="panel-heading">资产管理系统登录</div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label :class="{ err: (username==='') }" for="username">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户名
+            </label>
+            <input type="text" class="form-control" id="username" placeholder="请输入您的用户名" v-model="username">
+        </div>
+        <div class="form-group">
+            <label :class="{ err: (passwd==='') }" for="passwd">
+                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 密码
+            </label>
+            <input type="password" class="form-control" id="passwd" placeholder="请输入您的密码" v-model="passwd">
+        </div>
+        <button type="button" class="btn btn-info btn-block" @click="Login()">
+            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 登录
+        </button>
+        <div class="panel-body">
+            <a href="reg.html" class="btn btn-link btn-block mybtn" role="button">注册</a>
+        </div>
+    </div>
+</div>
+
+<script src="plugins/jquery/jquery-3.5.1.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/vue/vue.js"></script>
+<script src="js/login.js"></script>
+<script src="plugins/layer/layer.js"></script>
+
+</body>
+</html>

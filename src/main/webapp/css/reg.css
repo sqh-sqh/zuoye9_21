@@ -1,0 +1,16 @@
+.registered {
+    width: 320px;
+    margin: 100px auto 0 auto;
+}
+
+.registered .panel-heading {
+    text-align: center;
+}
+
+/*.login label {*/
+/*    color: red;*/
+/*}*/
+
+.err {
+    color: red;
+}

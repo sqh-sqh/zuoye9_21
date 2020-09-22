@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.my.dao.FinanceMapper">
+
+<!--    增加-->
+    <insert id="add">
+        INSERT INTO finance (user, voucher ,payTime ,infor) VALUES (#{fi.user}, #{fi.voucher}, #{fi.payTime}, #{fi.infor})
+    </insert>
+<!--    查询-->
+    <select id="list" resultType="org.my.model.Finance">
+        SELECT * FROM finance t1 <include refid="utilSql"></include>
+    </select>
+<!--    计数-->
+    <select id="listCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM finance t1 <include refid="utilSql"></include>
+    </select>
+<!--    修改-->
+    <update id="save">
+        UPDATE finance SET user=#{finance.user}, voucher=#{finance.voucher}, payTime=#{finance.payTime}, infor=#{finance.infor} WHERE financeId = #{finance.financeId}
+    </update>
+    <!--    删除-->
+    <delete id="del">
+        DELETE FROM finance WHERE financeId = #{financeId}
+    </delete>
+
+<!--    动态SQL（查询）-->
+    <sql id="utilSql">
+        <where>
+            <if test="voucher != null and voucher != ''">
+                AND t1.voucher LIKE CONCAT('%', #{voucher}, '%')
+            </if>
+            <if test="user != null and user != ''">
+                AND t1.user LIKE CONCAT('%', #{user}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>
